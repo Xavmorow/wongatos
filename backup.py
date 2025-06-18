@@ -56,38 +56,7 @@ class AdminMainMenu:
     def show(self):
         self.btn_frame.pack(expand=True, fill="both")
 
-class AdminMainMenu:
-    def __init__(self, root, admin_instance):
-        self.root = root
-        self.admin_instance = admin_instance
-        self.root.title("Admin Panel - Bengkel Proper")
-        self.root.geometry("600x200")
-        self.root.configure(bg="#6A9AB0")
-        self.root.minsize(600, 200)
 
-        # Frame untuk tombol utama
-        self.btn_frame = tk.Frame(self.root, bg="#6A9AB0")
-        self.btn_frame.pack(side="top", fill="x")
-
-        # Tombol utama, diatur dari kiri ke kanan
-        self.manage_pelanggan_btn = tk.Button(self.btn_frame, text="Manage Pelanggan", font=("poppins", 11, "bold"),
-                                             command=lambda: admin_instance.show_manage_pelanggan())
-        self.manage_pelanggan_btn.pack(side="left", padx=5, pady=5)
-        self.manage_produk_btn = tk.Button(self.btn_frame, text="Manage Produk", font=("poppins", 11, "bold"),
-                                          command=lambda: admin_instance.show_manage_barang())
-        self.manage_produk_btn.pack(side="left", padx=5, pady=5)
-        self.manage_servis_btn = tk.Button(self.btn_frame, text="Manage Servis", font=("poppins", 11, "bold"),
-                                          command=lambda: admin_instance.show_manage_servis())
-        self.manage_servis_btn.pack(side="left", padx=5, pady=5)
-        self.laporan_transaksi_btn = tk.Button(self.btn_frame, text="Laporan Transaksi", font=("poppins", 11, "bold"),
-                                              command=lambda: admin_instance.show_laporan_transaksi())
-        self.laporan_transaksi_btn.pack(side="left", padx=5, pady=5)
-        self.logout_btn = tk.Button(self.btn_frame, text="Logout", font=("poppins", 11, "bold"), width=15,
-                                   bg="#FF5555", fg="#f5f5f5", command=admin_instance.logout)
-        self.logout_btn.pack(side="left", padx=5, pady=5)
-
-    def show(self):
-        self.btn_frame.pack(side="top", fill="x")
 
 class AdminMenu:
     def __init__(self):
