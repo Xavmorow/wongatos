@@ -20,56 +20,106 @@ layanan_servis = {
 opsi_servis = list(layanan_servis.keys())
 
 class AdminMainMenu:
-    def __init__(self, root, admin_instance):
+    # def __init__(self, root, admin_instance):
+    #     self.root = root
+    #     self.admin_instance = admin_instance
+    #     self.root.title("Admin Panel - Bengkel Proper")
+    #     self.root.geometry("600x200")
+    #     self.root.configure(bg="#6A9AB0")
+    #     self.root.minsize(600, 200)  # Ukuran minimum agar tombol terlihat
+        
+    #     # Frame untuk tombol, diletakkan di tengah
+    #     self.btn_frame = tk.Frame(self.root, bg="#6A9AB0")
+    #     self.btn_frame.pack(expand=True, fill="both")
+        
+        # Frame dalam untuk tombol agar tetap dari kiri ke kanan
+        # self.inner_btn_frame = tk.Frame(self.btn_frame, bg="#6A9AB0")
+        # self.inner_btn_frame.pack(expand=True)
+        
+        # Tombol utama, diatur dari kiri ke kanan
+        # self.manage_pelanggan_btn = tk.Button(self.inner_btn_frame, text="Manage Pelanggan", font=("poppins", 11, "bold"),
+        #                                      command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_manage_pelanggan()])
+        # self.manage_pelanggan_btn.pack(side="left", padx=5, pady=5)
+        # self.manage_produk_btn = tk.Button(self.inner_btn_frame, text="Manage Produk", font=("poppins", 11, "bold"),
+        #                                   command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_manage_barang()])
+        # self.manage_produk_btn.pack(side="left", padx=5, pady=5)
+        # self.manage_servis_btn = tk.Button(self.inner_btn_frame, text="Manage Servis", font=("poppins", 11, "bold"),
+        #                                   command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_manage_servis()])
+        # self.manage_servis_btn.pack(side="left", padx=5, pady=5)
+        # self.laporan_transaksi_btn = tk.Button(self.inner_btn_frame, text="Laporan Transaksi", font=("poppins", 11, "bold"),
+        #                                       command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_laporan_transaksi()])
+        # self.laporan_transaksi_btn.pack(side="left", padx=5, pady=5)
+        # self.logout_btn = tk.Button(self.inner_btn_frame, text="Logout", font=("poppins", 11, "bold"), width=15,
+        #                            bg="#FF5555", fg="#f5f5f5", command=admin_instance.logout)
+        # self.logout_btn.pack(side="left", padx=5, pady=5)
+
+    # def show(self):
+    #     self.btn_frame.pack(expand=True, fill="both")
+    
+    def __init__(self, root, admin_instance=None):
         self.root = root
         self.admin_instance = admin_instance
         self.root.title("Admin Panel - Bengkel Proper")
-        self.root.geometry("600x200")
+        self.root.geometry("400x300")
         self.root.configure(bg="#6A9AB0")
-        self.root.minsize(600, 200)  # Ukuran minimum agar tombol terlihat
-        
-        # Frame untuk tombol, diletakkan di tengah
+        self.root.minsize(400, 300)
+
         self.btn_frame = tk.Frame(self.root, bg="#6A9AB0")
-        self.btn_frame.pack(expand=True, fill="both")
-        
-        # Frame dalam untuk tombol agar tetap dari kiri ke kanan
+        self.btn_frame.pack(expand=True)
+
+        # Tambahkan frame dalam untuk tombol vertikal
         self.inner_btn_frame = tk.Frame(self.btn_frame, bg="#6A9AB0")
         self.inner_btn_frame.pack(expand=True)
-        
-        # Tombol utama, diatur dari kiri ke kanan
-        self.manage_pelanggan_btn = tk.Button(self.inner_btn_frame, text="Manage Pelanggan", font=("poppins", 11, "bold"),
-                                             command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_manage_pelanggan()])
-        self.manage_pelanggan_btn.pack(side="left", padx=5, pady=5)
-        self.manage_produk_btn = tk.Button(self.inner_btn_frame, text="Manage Produk", font=("poppins", 11, "bold"),
-                                          command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_manage_barang()])
-        self.manage_produk_btn.pack(side="left", padx=5, pady=5)
-        self.manage_servis_btn = tk.Button(self.inner_btn_frame, text="Manage Servis", font=("poppins", 11, "bold"),
-                                          command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_manage_servis()])
-        self.manage_servis_btn.pack(side="left", padx=5, pady=5)
-        self.laporan_transaksi_btn = tk.Button(self.inner_btn_frame, text="Laporan Transaksi", font=("poppins", 11, "bold"),
-                                              command=lambda: [self.btn_frame.pack_forget(), admin_instance.show_laporan_transaksi()])
-        self.laporan_transaksi_btn.pack(side="left", padx=5, pady=5)
-        self.logout_btn = tk.Button(self.inner_btn_frame, text="Logout", font=("poppins", 11, "bold"), width=15,
-                                   bg="#FF5555", fg="#f5f5f5", command=admin_instance.logout)
-        self.logout_btn.pack(side="left", padx=5, pady=5)
+
+        # Tombol-tombol tersusun vertikal
+        tk.Button(self.inner_btn_frame, text="Manage Pelanggan", font=("poppins", 11, "bold"),
+                  width=30, command=self.buka_manage_pelanggan).pack(pady=5)
+        tk.Button(self.inner_btn_frame, text="Manage Produk", font=("poppins", 11, "bold"),
+                  width=30, command=self.buka_manage_produk).pack(pady=5)
+        tk.Button(self.inner_btn_frame, text="Manage Servis", font=("poppins", 11, "bold"),
+                  width=30, command=self.buka_manage_servis).pack(pady=5)
+        tk.Button(self.inner_btn_frame, text="Laporan Penjualan", font=("poppins", 11, "bold"),
+                  width=30, command=self.buka_laporan_penjualan).pack(pady=5)
+        tk.Button(self.inner_btn_frame, text="Logout", font=("poppins", 11, "bold"),
+                  width=30, bg="#FF5555", fg="#f5f5f5", command=self.logout).pack(pady=10)
 
     def show(self):
         self.btn_frame.pack(expand=True, fill="both")
 
+    def buka_manage_pelanggan(self):
+        self.btn_frame.pack_forget()  # Menyembunyikan menu utama
+        if self.admin_instance:
+            self.admin_instance.show_manage_pelanggan()
 
+    def buka_manage_produk(self):
+        self.root.withdraw()
+        ManageProduk(self.root)
 
-class AdminMenu:
-    def __init__(self):
-        self.root = tk.Tk()
+    def buka_manage_servis(self):
+        self.root.withdraw()
+        ManageServis(self.root)
+
+    def buka_laporan_penjualan(self):
+        self.root.withdraw()
+        LaporanPenjualan(self.root)
+
+    def logout(self):
+        confirm = messagebox.askyesno("Konfirmasi Logout", "Apakah Anda yakin ingin logout?")
+        if confirm:
+            self.root.destroy()
+            root = tk.Tk()
+            AplikasiLogin(root)
+            root.mainloop()
+
+class ManagePelanggan: 
+    def __init__(self, admin_instance):
+        # self.root = tk.Tk()
+        self.root = root
+        self.admin_instance = admin_instance
         self.root.title("Admin Panel - Bengkel Proper")
-        self.root.geometry("1000x700")
+        self.root.geometry("1200x600")
         self.root.configure(bg="#6A9AB0")
-        self.root.minsize(1000, 700)
-
-        # Judul
-        title_label = tk.Label(self.root, text="Hallo, Admin!", font=("poppins", 20, "bold"),
-                              bg="#6A9AB0", fg="white")
-        title_label.pack(pady=20)
+        # self.root.minsize(1000, 700)
 
         # Frame untuk tombol utama
         self.admin_main_menu = AdminMainMenu(self.root, self)
@@ -81,10 +131,12 @@ class AdminMenu:
         self.root.mainloop()
 
     def logout(self):
-        self.root.destroy()
-        root = tk.Tk()
-        app = AplikasiLogin(root)
-        root.mainloop()
+        confirm = messagebox.askyesno("Konfirmasi Logout", "Apakah Anda yakin ingin logout?")
+        if confirm:
+            self.root.destroy()
+            root = tk.Tk()
+            app = AplikasiLogin(root)
+            root.mainloop()
 
     def clear_content_frame(self):
         for widget in self.content_frame.winfo_children():
@@ -92,76 +144,153 @@ class AdminMenu:
 
     def show_manage_pelanggan(self):
         self.clear_content_frame()
+        self.root.geometry("700x350")  # Ukuran sesuai desain
+        self.content_frame.configure(bg="#6A9AB0")
         self.content_frame.pack(fill="both", expand=True)
 
-        tk.Label(self.content_frame, text="Manage Pelanggan", font=("poppins", 14, "bold"),
-                 bg="#6A9AB0", fg="white").pack(pady=10)
+        # Judul
+        tk.Label(self.content_frame, text="Manage Pelanggan", font=("Poppins", 14, "bold"),
+                bg="#6A9AB0", fg="white").pack(pady=10)
 
-        form_frame = tk.Frame(self.content_frame, bg="#6A9AB0")
-        form_frame.pack(pady=5)
+        # Frame untuk tabel
+        tree_container = tk.Frame(self.content_frame, bg="#6A9AB0")
+        tree_container.pack(padx=20, pady=10, fill="both", expand=False)
 
-        tk.Label(form_frame, text="Nama:", font=("poppins", 12),
-                 bg="#6A9AB0", fg="white").pack(side="left", padx=5)
-        self.entry_nama = tk.Entry(form_frame, font=("poppins", 12), width=25)
-        self.entry_nama.pack(side="left", padx=5)
+        style = ttk.Style()
+        style.configure("Treeview",
+                        background="#FAF5F5",
+                        fieldbackground="#FAF5F5",
+                        font=("Poppins", 10))
+        style.configure("Treeview.Heading", font=("Poppins", 10, "bold"))
 
-        tk.Label(form_frame, text="Kendaraan:", font=("poppins", 12),
-                 bg="#6A9AB0", fg="white").pack(side="left", padx=5)
-        self.entry_kendaraan = tk.Entry(form_frame, font=("poppins", 12), width=25)
-        self.entry_kendaraan.pack(side="left", padx=5)
+        # Scrollbar
+        v_scroll = ttk.Scrollbar(tree_container, orient="vertical")
+        v_scroll.pack(side="right", fill="y")
 
-        tk.Label(form_frame, text="Servis:", font=("poppins", 12),
-                 bg="#6A9AB0", fg="white").pack(side="left", padx=5)
-        servis_frame = tk.Frame(form_frame, bg="#6A9AB0")
-        servis_frame.pack(side="left", padx=5)
-        self.servis_vars = {}
-        for i, servis in enumerate(opsi_servis):
-            var = tk.BooleanVar()
-            tk.Checkbutton(servis_frame, text=servis, variable=var,
-                           bg="#6A9AB0", fg="white", font=("poppins", 10),
-                           selectcolor="#6A9AB0",
-                           activebackground="#6A9AB0", activeforeground="white",
-                           indicatoron=1).pack(anchor="w")
-            self.servis_vars[servis] = var
-
-        tk.Button(form_frame, text="Tambah", font=("poppins", 11, "bold"),
-                  command=self.tambah_pelanggan).pack(side="left", padx=5)
-
-        tree_frame = tk.Frame(self.content_frame)
-        tree_frame.pack(padx=20, pady=10, fill="both", expand=True)
-        self.tree = ttk.Treeview(tree_frame, columns=("Id", "Nama", "Kendaraan", "Servis", "Tanggal"),
-                                 show="headings", height=12)
+        # Treeview
+        self.tree = ttk.Treeview(tree_container, columns=("Id", "Nama", "Kendaraan", "Servis"),
+                                show="headings", height=8, yscrollcommand=v_scroll.set)
         self.tree.heading("Id", text="Id")
         self.tree.heading("Nama", text="Nama")
         self.tree.heading("Kendaraan", text="Kendaraan")
         self.tree.heading("Servis", text="Servis")
-        self.tree.heading("Tanggal", text="Tanggal")
-        self.tree.column("Id", width=50)
-        self.tree.column("Nama", width=150)
-        self.tree.column("Kendaraan", width=150)
-        self.tree.column("Servis", width=200)
-        self.tree.column("Tanggal", width=100)
 
-        v_scroll = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tree.yview)
-        h_scroll = ttk.Scrollbar(tree_frame, orient="horizontal", command=self.tree.xview)
-        self.tree.configure(yscrollcommand=v_scroll.set, xscrollcommand=h_scroll.set)
-        v_scroll.pack(side="right", fill="y")
-        h_scroll.pack(side="bottom", fill="x")
+        self.tree.column("Id", width=50, anchor="center")
+        self.tree.column("Nama", width=150, anchor="w")
+        self.tree.column("Kendaraan", width=150, anchor="w")
+        self.tree.column("Servis", width=250, anchor="w")
+
         self.tree.pack(side="left", fill="both", expand=True)
+        v_scroll.config(command=self.tree.yview)
 
+        # Isi data ke treeview
         for data in antrian:
-            self.tree.insert("", "end", values=(data[0], data[1], data[2], data[3], data[4]))
+            self.tree.insert("", "end", values=(data[0], data[1], data[2], data[3]))
 
+        # Frame tombol di bawah
         btn_frame = tk.Frame(self.content_frame, bg="#6A9AB0")
         btn_frame.pack(pady=10)
-        tk.Button(btn_frame, text="Edit Pelanggan", font=("poppins", 11, "bold"),
-                  bg="#f5cb41", fg="white", command=self.buka_form_edit_pelanggan).pack(side="left", padx=10)
-        tk.Button(btn_frame, text="Hapus Pelanggan", font=("poppins", 11, "bold"),
-                  bg="#FC6655", fg="white", command=self.hapus_pelanggan).pack(side="left", padx=10)
-        tk.Button(btn_frame, text="Kembali", font=("poppins", 11, "bold"),
-                  command=self.kembali_ke_menu_utama).pack(side="left", padx=10)
 
-    def tambah_pelanggan(self):
+        tk.Button(btn_frame, text="Tambah Pelanggan", font=("Poppins", 10, "bold"), width=18, bg="#6DEB89", fg="#f5f5f5", command=self.buka_form_tambah_pelanggan).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Edit Pelanggan", font=("Poppins", 10, "bold"), width=18, bg="#f5cb41", fg="#f5f5f5", command=self.buka_form_edit_pelanggan).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Hapus Pelanggan", font=("Poppins", 10, "bold"), width=18, bg="#f24822", fg="#f5f5f5", command=self.hapus_pelanggan).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Kembali", font=("Poppins", 10, "bold"), width=15, bg="#f5f5f5", fg="#3A6D8C", command=self.kembali_ke_menu_utama).pack(side="left", padx=10)
+
+class ManageProduk: pass     # TO BE IMPLEMENTED
+class ManageServis: pass     # TO BE IMPLEMENTED
+class LaporanPenjualan: pass  # TO BE IMPLEMENTED
+class AplikasiLogin: pass
+
+class AdminMenu:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Admin Panel - Bengkel Proper")
+        self.root.geometry("1200x600")
+        self.root.configure(bg="#6A9AB0")
+        self.root.minsize(1000, 700)
+
+        # Frame untuk tombol utama
+        self.admin_main_menu = AdminMainMenu(self.root, self)
+
+        # Frame untuk konten
+        self.content_frame = tk.Frame(self.root, bg="#6A9AB0")
+        self.content_frame.pack(fill="both", expand=True)
+
+        self.root.mainloop()
+
+    # def logout(self):
+    #     self.root.destroy()
+    #     root = tk.Tk()
+    #     app = AplikasiLogin(root)
+    #     root.mainloop()
+
+    def logout(self):
+        confirm = messagebox.askyesno("Konfirmasi Logout", "Apakah Anda yakin ingin logout?")
+        if confirm:
+            self.root.destroy()
+            root = tk.Tk()
+            app = AplikasiLogin(root)
+            root.mainloop()
+
+    def clear_content_frame(self):
+        for widget in self.content_frame.winfo_children():
+            widget.destroy()
+
+    def show_manage_pelanggan(self):
+        self.clear_content_frame()
+        self.root.geometry("700x350")  # Ukuran sesuai desain
+        self.content_frame.configure(bg="#6A9AB0")
+        self.content_frame.pack(fill="both", expand=True)
+
+        # Judul
+        tk.Label(self.content_frame, text="Manage Pelanggan", font=("Poppins", 14, "bold"),
+                bg="#6A9AB0", fg="white").pack(pady=10)
+
+        # Frame untuk tabel
+        tree_container = tk.Frame(self.content_frame, bg="#6A9AB0")
+        tree_container.pack(padx=20, pady=10, fill="both", expand=False)
+
+        style = ttk.Style()
+        style.configure("Treeview",
+                        background="#FAF5F5",
+                        fieldbackground="#FAF5F5",
+                        font=("Poppins", 10))
+        style.configure("Treeview.Heading", font=("Poppins", 10, "bold"))
+
+        # Scrollbar
+        v_scroll = ttk.Scrollbar(tree_container, orient="vertical")
+        v_scroll.pack(side="right", fill="y")
+
+        # Treeview
+        self.tree = ttk.Treeview(tree_container, columns=("Id", "Nama", "Kendaraan", "Servis"),
+                                show="headings", height=8, yscrollcommand=v_scroll.set)
+        self.tree.heading("Id", text="Id")
+        self.tree.heading("Nama", text="Nama")
+        self.tree.heading("Kendaraan", text="Kendaraan")
+        self.tree.heading("Servis", text="Servis")
+
+        self.tree.column("Id", width=50, anchor="center")
+        self.tree.column("Nama", width=150, anchor="w")
+        self.tree.column("Kendaraan", width=150, anchor="w")
+        self.tree.column("Servis", width=250, anchor="w")
+
+        self.tree.pack(side="left", fill="both", expand=True)
+        v_scroll.config(command=self.tree.yview)
+
+        # Isi data ke treeview
+        for data in antrian:
+            self.tree.insert("", "end", values=(data[0], data[1], data[2], data[3]))
+
+        # Frame tombol di bawah
+        btn_frame = tk.Frame(self.content_frame, bg="#6A9AB0")
+        btn_frame.pack(pady=10)
+
+        tk.Button(btn_frame, text="Tambah Pelanggan", font=("Poppins", 10, "bold"), width=18, bg="#6DEB89", fg="#f5f5f5", command=self.buka_form_tambah_pelanggan).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Edit Pelanggan", font=("Poppins", 10, "bold"), width=18, bg="#f5cb41", fg="#f5f5f5", command=self.buka_form_edit_pelanggan).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Hapus Pelanggan", font=("Poppins", 10, "bold"), width=18, bg="#f24822", fg="#f5f5f5", command=self.hapus_pelanggan).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Kembali", font=("Poppins", 10, "bold"), width=15, bg="#f5f5f5", fg="#3A6D8C", command=self.kembali_ke_menu_utama).pack(side="left", padx=10)
+
+    def buka_form_tambah_pelanggan(self):
         nama = self.entry_nama.get().strip()
         kendaraan = self.entry_kendaraan.get().strip()
         servis_terpilih = [s for s, var in self.servis_vars.items() if var.get()]
@@ -248,6 +377,10 @@ class AdminMenu:
 
         tk.Button(self.content_frame, text="Kembali", font=("poppins", 11, "bold"),
                   command=self.kembali_ke_menu_utama).pack(pady=10)
+        
+        logout_button = tk.Button(self.root, text="Logout", font=("Poppins", 10, "bold"), width=10, bg="#FF5555", fg="#f5f5f5", command=self.logout)
+        logout_button.place(relx=1.0, x=-28, y=20, anchor="ne")  # relx=1.0 artinya sisi kanan, x=-20 beri margin
+
 
     def tambah_barang(self):
         nama = self.entry_barang.get().strip().title()
@@ -654,7 +787,10 @@ class MainMenu:
         tk.Button(button_frame, text="Edit", font=("Poppins", 11, "bold"), width=12, bg="#f5cb41", fg="#f5f5f5", command=self.buka_form_edit).pack(side="left", padx=10)
         tk.Button(button_frame, text="Hapus", font=("Poppins", 11, "bold"), width=15, bg="#f24822", fg="#f5f5f5", command=self.hapus_data).pack(side="left", padx=10)
         tk.Button(button_frame, text="Tagihan", font=("Poppins", 11, "bold"), width=15, bg="#6DEB89", fg="#f5f5f5", command=self.buka_form_bayar).pack(side="left", padx=10)
-        tk.Button(button_frame, text="Logout", font=("Poppins", 11, "bold"), width=15, bg="#FF5555", fg="#f5f5f5", command=self.logout).pack(side="left", padx=10)
+        # tk.Button(button_frame, text="Logout", font=("Poppins", 11, "bold"), width=15, bg="#FF5555", fg="#f5f5f5", command=self.logout).pack(side="left", padx=10)
+        logout_button = tk.Button(self.root, text="Logout", font=("Poppins", 10, "bold"), width=10, bg="#FF5555", fg="#f5f5f5", command=self.logout)
+        logout_button.place(relx=1.0, x=-28, y=20, anchor="ne")  # relx=1.0 artinya sisi kanan, x=-20 beri margin
+
 
     def logout(self):
         self.root.destroy()
